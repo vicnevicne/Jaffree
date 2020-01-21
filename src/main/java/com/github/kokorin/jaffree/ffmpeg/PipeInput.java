@@ -69,7 +69,7 @@ public class PipeInput extends TcpInput<PipeInput> implements Input {
                 IOUtil.copy(source, destination, bufferSize);
             } catch (SocketException e) {
                 // client has no way to notify server that no more data is needed
-                LOGGER.debug("Ignoring exception: " + e.getMessage());
+                LOGGER.debug("Ignoring exception: {}", e.getMessage());
             } catch (IOException e) {
                 throw new RuntimeException("Failed to copy data", e);
             }

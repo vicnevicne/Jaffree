@@ -24,7 +24,7 @@ import java.io.ByteArrayOutputStream;
 import java.io.IOException;
 import java.util.*;
 
-public class NutWriter {
+public class NutWriter implements AutoCloseable {
     private final NutOutputStream output;
     private final ByteArrayOutputStream buffer = new ByteArrayOutputStream();
 
@@ -608,6 +608,10 @@ public class NutWriter {
         output.flush();
     }
 
+    @Override
+    public void close() throws Exception {
+        output.close();
+    }
 
     private static class TsFrame {
         public final Rational timestamp;

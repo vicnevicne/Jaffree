@@ -24,7 +24,6 @@ import org.slf4j.LoggerFactory;
 
 import java.awt.image.BufferedImage;
 import java.awt.image.DataBufferByte;
-import java.io.Closeable;
 import java.io.IOException;
 import java.io.OutputStream;
 import java.nio.ByteBuffer;
@@ -57,8 +56,7 @@ public class NutFrameSupplier implements TcpInput.Supplier {
 
     @Override
     public void supplyAndClose(OutputStream out) {
-        try (Closeable toClose = out) {
-            NutWriter writer = new NutWriter(new NutOutputStream(out));
+        try (NutWriter writer = new NutWriter(new NutOutputStream(out))) {
             if (frameOrderingBufferMillis != null) {
                 writer.setFrameOrderingBufferMillis(frameOrderingBufferMillis);
             }

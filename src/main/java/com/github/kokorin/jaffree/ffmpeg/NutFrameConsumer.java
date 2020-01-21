@@ -25,7 +25,6 @@ import org.slf4j.LoggerFactory;
 import java.awt.*;
 import java.awt.color.ColorSpace;
 import java.awt.image.*;
-import java.io.Closeable;
 import java.io.IOException;
 import java.io.InputStream;
 import java.nio.ByteBuffer;
@@ -46,17 +45,14 @@ public class NutFrameConsumer implements TcpOutput.Consumer {
 
     @Override
     public void consumeAndClose(InputStream input) {
-        try (Closeable toClose = input) {
-            read(input);
-        } catch (IOException e) {
+        try (NutReader nutReader = new NutReader(new NutInputStream(input))) {
+            read(nutReader);
+        } catch (Exception e) {
             throw new RuntimeException("Failed to read stream", e);
         }
     }
 
-    void read(InputStream input) throws IOException {
-        NutInputStream stream = new NutInputStream(input);
-        NutReader nutReader = new NutReader(stream);
-
+    void read(NutReader nutReader) throws IOException {
         MainHeader mainHeader = nutReader.getMainHeader();
         StreamHeader[] streamHeaders = nutReader.getStreamHeaders();
         List<Stream> streams = parseTracks(mainHeader, streamHeaders);

@@ -22,7 +22,7 @@ import com.github.kokorin.jaffree.Rational;
 import java.io.IOException;
 import java.util.*;
 
-public class NutReader {
+public class NutReader implements AutoCloseable {
     private final NutInputStream input;
     private boolean read = false;
     private MainHeader mainHeader;
@@ -429,6 +429,10 @@ public class NutReader {
         return new PacketFooter(checksum);
     }
 
+    @Override
+    public void close() throws Exception {
+        input.close();
+    }
 
     private static class PacketHeader {
         public final long startcode;
