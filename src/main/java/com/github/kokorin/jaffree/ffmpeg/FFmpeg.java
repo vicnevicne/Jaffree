@@ -103,6 +103,7 @@ public class FFmpeg {
 
     /**
      * Supply custom ProgressListener to receive progress events
+     *
      * @param progressListener listener
      * @return this
      */
@@ -113,6 +114,7 @@ public class FFmpeg {
 
     /**
      * Supply custom OutputListener to receive ffmpeg output.
+     *
      * @param outputListener listener
      * @return this
      */

@@ -86,7 +86,7 @@ public class Mosaic {
                     results.add(result);
 
                 }
-            }, "Reader-"+ i + "-main");
+            }, "Reader-" + i + "-main");
             ffmpegThread.setDaemon(true);
             ffmpegThread.start();
         }
@@ -103,7 +103,7 @@ public class Mosaic {
                 .setOverwriteOutput(true)
                 .setLogLevel(LogLevel.TRACE)
                 .addOutput(UrlOutput
-                        .toUrl("mosaic.mp4")
+                                .toUrl("mosaic.mp4")
                         //.addMap(0)
                 )
                 .addArguments("-filter_complex", "amix=inputs=" + inputs.size())
@@ -165,7 +165,7 @@ public class Mosaic {
 
                     result = produceVideoFrame(nextVideoFrames);
                     // We have to read video frames ahead, otherwise we will have no audio frames read
-                   readNextVideoFrames(nextVideoFrameTimecode);
+                    readNextVideoFrames(nextVideoFrameTimecode);
                 } else if (nextAudioFrameTimecode <= timecode) {
                     result = produceAudioFrame();
                 }
