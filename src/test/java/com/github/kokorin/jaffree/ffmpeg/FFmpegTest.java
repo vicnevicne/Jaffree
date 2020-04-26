@@ -1,11 +1,19 @@
 package com.github.kokorin.jaffree.ffmpeg;
 
-import com.github.kokorin.jaffree.*;
+import com.github.kokorin.jaffree.Artifacts;
+import com.github.kokorin.jaffree.LogLevel;
+import com.github.kokorin.jaffree.SizeUnit;
+import com.github.kokorin.jaffree.StackTraceMatcher;
+import com.github.kokorin.jaffree.StreamType;
 import com.github.kokorin.jaffree.ffprobe.FFprobe;
 import com.github.kokorin.jaffree.ffprobe.FFprobeResult;
 import com.github.kokorin.jaffree.ffprobe.Stream;
 import org.apache.commons.io.IOUtils;
-import org.junit.*;
+import org.junit.Assert;
+import org.junit.BeforeClass;
+import org.junit.Ignore;
+import org.junit.Rule;
+import org.junit.Test;
 import org.junit.rules.ExpectedException;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
@@ -26,7 +34,10 @@ import java.util.concurrent.atomic.AtomicBoolean;
 import java.util.concurrent.atomic.AtomicLong;
 import java.util.concurrent.atomic.AtomicReference;
 
-import static java.nio.file.StandardOpenOption.*;
+import static java.nio.file.StandardOpenOption.CREATE;
+import static java.nio.file.StandardOpenOption.READ;
+import static java.nio.file.StandardOpenOption.TRUNCATE_EXISTING;
+import static java.nio.file.StandardOpenOption.WRITE;
 
 public class FFmpegTest {
     public static Path BIN;

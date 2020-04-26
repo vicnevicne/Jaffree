@@ -1,8 +1,16 @@
 package examples.programmatic;
 
 import com.github.kokorin.jaffree.LogLevel;
+import com.github.kokorin.jaffree.ffmpeg.FFmpeg;
+import com.github.kokorin.jaffree.ffmpeg.FFmpegResult;
 import com.github.kokorin.jaffree.ffmpeg.Frame;
-import com.github.kokorin.jaffree.ffmpeg.*;
+import com.github.kokorin.jaffree.ffmpeg.FrameConsumer;
+import com.github.kokorin.jaffree.ffmpeg.FrameInput;
+import com.github.kokorin.jaffree.ffmpeg.FrameOutput;
+import com.github.kokorin.jaffree.ffmpeg.FrameProducer;
+import com.github.kokorin.jaffree.ffmpeg.Stream;
+import com.github.kokorin.jaffree.ffmpeg.UrlInput;
+import com.github.kokorin.jaffree.ffmpeg.UrlOutput;
 import com.github.kokorin.jaffree.ffprobe.FFprobe;
 import com.github.kokorin.jaffree.ffprobe.FFprobeResult;
 import org.slf4j.Logger;
@@ -13,8 +21,14 @@ import java.awt.image.BufferedImage;
 import java.awt.image.ImageObserver;
 import java.nio.file.Path;
 import java.nio.file.Paths;
+import java.util.ArrayList;
+import java.util.Arrays;
+import java.util.Deque;
+import java.util.HashMap;
+import java.util.Iterator;
+import java.util.LinkedList;
 import java.util.List;
-import java.util.*;
+import java.util.Map;
 import java.util.concurrent.CopyOnWriteArrayList;
 
 /**
